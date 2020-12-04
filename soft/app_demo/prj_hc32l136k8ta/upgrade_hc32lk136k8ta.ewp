@@ -1272,8 +1272,8 @@
         <option>
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\</state>
-          <state>$PROJ_DIR$\..\pbc\pbc_hc32Lib\common</state>
-          <state>$PROJ_DIR$\..\pbc\pbc_hc32Lib\driver\inc</state>
+          <state>$PROJ_DIR$\lib_hc32l13x\common</state>
+          <state>$PROJ_DIR$\lib_hc32l13x\driver\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1969,6 +1969,24 @@
       </file>
     </group>
     <group>
+      <name>mde_led_blink</name>
+      <group>
+        <name>depend</name>
+        <file>
+          <name>$PROJ_DIR$\..\mde\mde_led_blink\depend\bsp_led_blink.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\mde\mde_led_blink\depend\bsp_led_blink.h</name>
+        </file>
+      </group>
+      <file>
+        <name>$PROJ_DIR$\..\mde\mde_led_blink\mde_led_blink.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\mde\mde_led_blink\mde_led_blink.h</name>
+      </file>
+    </group>
+    <group>
       <name>mde_random</name>
       <group>
         <name>depend</name>
@@ -1991,10 +2009,10 @@
       <group>
         <name>depend</name>
         <file>
-          <name>$PROJ_DIR$\..\mde\mde_sys_clock\depend\bps_system_clock.c</name>
+          <name>$PROJ_DIR$\..\mde\mde_sys_clock\depend\bsp_system_clock.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\mde\mde_sys_clock\depend\bps_system_clock.h</name>
+          <name>$PROJ_DIR$\..\mde\mde_sys_clock\depend\bsp_system_clock.h</name>
         </file>
       </group>
       <file>
@@ -2027,13 +2045,10 @@
       <group>
         <name>depend</name>
         <file>
-          <name>$PROJ_DIR$\..\mde\mde_watchdog\depend\bps_watchdog.c</name>
+          <name>$PROJ_DIR$\..\mde\mde_watchdog\depend\bsp_watchdog.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\mde\mde_watchdog\depend\bps_watchdog.h</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\pbc\pbc_dataConvert\pbc_dataConvert.h</name>
+          <name>$PROJ_DIR$\..\mde\mde_watchdog\depend\bsp_watchdog.h</name>
         </file>
       </group>
       <file>
@@ -2062,14 +2077,14 @@
       </file>
     </group>
     <group>
-      <name>pbc_hc32Lib</name>
+      <name>pbc_lib</name>
       <group>
         <name>common</name>
         <file>
-          <name>$PROJ_DIR$\..\pbc\pbc_hc32Lib\common\interrupts_hc32l13x.c</name>
+          <name>$PROJ_DIR$\lib_hc32l13x\common\interrupts_hc32l13x.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\pbc\pbc_hc32Lib\common\system_hc32l13x.c</name>
+          <name>$PROJ_DIR$\lib_hc32l13x\common\system_hc32l13x.c</name>
         </file>
       </group>
       <file>

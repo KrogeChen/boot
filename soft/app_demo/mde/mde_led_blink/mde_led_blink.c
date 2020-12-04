@@ -16,7 +16,7 @@ void mde_led_blink_task(void)
     pbc_timerClockRun_task(&timer_light);
     if(pbc_pull_timerIsCompleted(&timer_light))
     {
-       pbc_reload_timerClock(&timer_light,500);
+       pbc_reload_timerClock(&timer_light,100);
        if(lighton)
        {
            lighton = sdt_false;
