@@ -10,7 +10,7 @@
 #define SYB_PREAMBLE    0x55
 #define SYB_SFD         0xAB
 //------------------------------------------------------------------------------
-#define TIMEOUTV        1000
+#define TIMEOUTV        20
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //Bough 协议链路层处理
 //支持多模块化数据处理
@@ -135,6 +135,7 @@ static void bough_link_state_jump(bgk_oper_def* in_pBgk_oper)
                     in_pBgk_oper->bgk_rx_buff[0] = in_pBgk_oper->rx_byte;
                     in_pBgk_oper->receive_len = ((sdt_int16u)in_pBgk_oper->rx_byte) << 8;
                     in_pBgk_oper->bgk_run_status = bgk_rs_rx_lenLo;
+                    pbc_reload_timerClock(&in_pBgk_oper->timer_rx_timeout,TIMEOUTV);
                 }
                 break;
             }
@@ -159,6 +160,7 @@ static void bough_link_state_jump(bgk_oper_def* in_pBgk_oper)
                         in_pBgk_oper->bgk_run_status = bgk_rs_rx_data;
                         in_pBgk_oper->bgk_rx_buff[1] = in_pBgk_oper->rx_byte;
                         in_pBgk_oper->receive_index = 2;
+                        pbc_reload_timerClock(&in_pBgk_oper->timer_rx_timeout,TIMEOUTV);
                     }
                     
                 }
@@ -171,6 +173,7 @@ static void bough_link_state_jump(bgk_oper_def* in_pBgk_oper)
                     in_pBgk_oper->bgk_bits &= ~bgk_bits_rx_byte;
                     
                     in_pBgk_oper->bgk_rx_buff[in_pBgk_oper->receive_index] = in_pBgk_oper->rx_byte;
+                    pbc_reload_timerClock(&in_pBgk_oper->timer_rx_timeout,TIMEOUTV);
                     if((in_pBgk_oper->receive_index + 1) >= in_pBgk_oper->receive_len)
                     {
                         sdt_int8u Calculate_CRC[2];
@@ -334,6 +337,7 @@ static void bough_link_state_jump(bgk_oper_def* in_pBgk_oper)
                     if(in_pBgk_oper->bgk_bits & bgk_bits_rx_byte)
                     {
                         in_pBgk_oper->bgk_bits &= ~bgk_bits_rx_byte;
+                        pbc_reload_timerClock(&in_pBgk_oper->timer_tx_timeout,TIMEOUTV);
                         if(in_pBgk_oper->rx_byte == in_pBgk_oper->bgk_tx_buff[in_pBgk_oper->tx_feedback_index])
                         {
                             in_pBgk_oper->tx_feedback_index ++;
@@ -376,7 +380,8 @@ static void bough_link_state_jump(bgk_oper_def* in_pBgk_oper)
                         conflict_check = sdt_false;
                     }
                     remain_bytes = in_pBgk_oper->transfet_bytes_to_phy_tx(&in_pBgk_oper->bgk_tx_buff[in_pBgk_oper->transmit_index],(in_pBgk_oper->transmit_len - in_pBgk_oper->transmit_index),conflict_check);
-                    in_pBgk_oper->transmit_index = in_pBgk_oper->transmit_len - remain_bytes;                    
+                    in_pBgk_oper->transmit_index = in_pBgk_oper->transmit_len - remain_bytes;       
+                    pbc_reload_timerClock(&in_pBgk_oper->timer_tx_timeout,TIMEOUTV);                    
                 }
                 break;
             }
